@@ -28,6 +28,6 @@ jobs:
     - stage: install
       script: yarn
     - stage: test
-    - script: yarn test --coverage && cat ./coverage/lcov.info | npx coveralls && rm -rf ./coverage
+      script: yarn test --coverage && cat ./coverage/lcov.info | npx coveralls && rm -rf ./coverage
     - stage: build
       script: yarn build

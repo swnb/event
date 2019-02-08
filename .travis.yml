@@ -1,0 +1,33 @@
+language: node_js
+
+node_js: '10.0.0'
+
+git:
+  quiet: true
+  submodules: false
+  depth: 1
+
+branches:
+  only:
+    - master
+
+[skip cosmetic]: cosmetic code
+
+cache:
+  yarn: true
+
+stages:
+  - install
+  - test
+  - build
+  - name: deploy
+    if: branch = master
+
+jobs:
+  include:
+    - stage: install
+      script: yarn
+    - stage: test
+    - script: yarn test --coverage && cat ./coverage/lcov.info | npx coveralls && rm -rf ./coverage
+    - stage: build
+      script: yarn build

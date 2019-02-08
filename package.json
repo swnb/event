@@ -1,31 +1,37 @@
 {
-  "name": "event",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "files": [
-    "lib/**/*"
-  ],
-  "scripts": {
-    "build": "tsc",
-    "format": "prettier --write \"src/**/*.ts\" \"src/**/*.js\"",
-    "lint": "tslint -p tsconfig.json"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/swnb/event.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/swnb/event/issues"
-  },
-  "homepage": "https://github.com/swnb/event#readme",
-  "devDependencies": {
-    "prettier": "^1.16.4",
-    "tslint": "^5.12.1",
-    "tslint-config-prettier": "^1.18.0",
-    "typescript": "^3.3.3"
-  }
+	"name": "power-event",
+	"version": "1.0.0",
+	"description": "powerful event module",
+	"main": "lib/index.js",
+	"types": "lib/index.d.ts",
+	"files": [
+		"lib/**/*"
+	],
+	"scripts": {
+		"build": "tsc",
+		"test": "jest --coverage",
+		"lint": "tslint -p tsconfig.json"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/swnb/event.git"
+	},
+	"keywords": [
+		"event"
+	],
+	"author": "swnb",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/swnb/event/issues"
+	},
+	"homepage": "https://github.com/swnb/event#readme",
+	"devDependencies": {
+		"@types/jest": "^24.0.0",
+		"jest": "^24.1.0",
+		"prettier": "^1.16.4",
+		"ts-jest": "^23.10.5",
+		"tslint": "^5.12.1",
+		"tslint-config-prettier": "^1.18.0",
+		"typescript": "^3.3.3"
+	}
 }

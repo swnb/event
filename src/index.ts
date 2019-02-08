@@ -1,4 +1,4 @@
-import { Throttle } from '../utils/throttle';
+import { Throttle } from './utils/throttle';
 
 export type Callback = (...arg: any) => void;
 type SpaceType = symbol | number | string;

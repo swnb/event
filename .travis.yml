@@ -31,3 +31,12 @@ jobs:
       script: yarn test --coverage && cat ./coverage/lcov.info | npx coveralls && rm -rf ./coverage
     - stage: build
       script: yarn build
+    - stage: deploy
+      script: skip
+      deploy: &npm
+        provider: npm
+        skip_cleanup: true
+        email: $email
+        api_key: $npm-publish-token
+        on:
+          branch: master

@@ -1,1 +1,1 @@
-# power-event ![](https://travis-ci.com/swnb/event.svg?branch=master) ![](https://coveralls.io/repos/github/swnb/event/badge.svg?branch=master) ![](https://img.shields.io/github/license/swnb/event.svg?style=flat)
+# power-event ![](https://travis-ci.com/swnb/event.svg?branch=master) ![](https://coveralls.io/repos/github/swnb/event/badge.svg?branch=master) ![](https://img.shields.io/bundlephobia/minzip/power-event.svg?style=flat) ![](https://img.shields.io/github/license/swnb/event.svg?style=flat)

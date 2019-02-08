@@ -17,26 +17,23 @@ cache:
   yarn: true
 
 stages:
-  - install
   - test
   - build
+  - deploy
   - name: deploy
     if: branch = master
 
+install: yarn
+
 jobs:
   include:
-    - stage: install
-      script: yarn
     - stage: test
       script: yarn test --coverage && cat ./coverage/lcov.info | npx coveralls && rm -rf ./coverage
-    - stage: build
-      script: yarn build
     - stage: deploy
+      before_deploy: yarn build
       script: skip
       deploy: &npm
         provider: npm
         skip_cleanup: true
         email: $email
-        api_key: $npm-publish-token
-        on:
-          branch: master
+        api_key: $token

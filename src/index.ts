@@ -22,7 +22,7 @@ export interface EventCenter {
 
 const defaultSpace = Symbol();
 
-export class Event implements EventCenter {
+class Event implements EventCenter {
 	public static create = () => new Event();
 	// choose space with space name
 	public static space = (namespace: SpaceType = defaultSpace) => {
@@ -137,3 +137,5 @@ export class Event implements EventCenter {
 		return null
 	}
 }
+
+export default Event;

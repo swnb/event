@@ -1,4 +1,4 @@
-import { Event } from '../index';
+import Event from '../index';
 
 test("listen emit", () => {
 	const a = Event.space();

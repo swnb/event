@@ -11,7 +11,7 @@ branches:
   only:
     - master
 
-[skip cosmetic]: cosmetic code
+[skip travis]: update README
 
 cache:
   yarn: true

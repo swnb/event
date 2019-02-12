@@ -1,8 +1,8 @@
 import Event from '../index';
 
-const _setInterval = setInterval;
-const _setTimeout = setTimeout;
-const _clearInterval = clearInterval;
+const localSetInterval = setInterval;
+const localSetTimeout = setTimeout;
+const localClearInterval = clearInterval;
 
 test("listen emit", () => {
 	const a = Event.space();
@@ -91,13 +91,13 @@ test("throttleEmit", done => {
 	const b = Event.space(eventSpace);
 	const callback = jest.fn();
 	b.on('event-name', (message) => {
-		_clearInterval(timeId);
+		localClearInterval(timeId);
 		expect(message).toBe("message2");
 		callback();
 		done()
 	});
 	a.setThrottleEmit("event-name", 100);
-	const timeId = _setInterval(() => {
+	const timeId = localSetInterval(() => {
 		a.emit("event-name", "message2");
 	}, 200);
 })
@@ -113,11 +113,11 @@ test("throttleEmit real slow", done => {
 
 	});
 	a.setThrottleEmit("event-name", 200);
-	const timeId = _setInterval(() => {
+	const timeId = localSetInterval(() => {
 		a.emit("event-name", "message2");
 	}, 50);
-	_setTimeout(() => {
-		_clearInterval(timeId);
+	localSetTimeout(() => {
+		localClearInterval(timeId);
 		expect(callback).toBeCalledTimes(4)
 		done();
 	}, 1000);

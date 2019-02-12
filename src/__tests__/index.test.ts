@@ -1,5 +1,9 @@
 import Event from '../index';
 
+const _setInterval = setInterval;
+const _setTimeout = setTimeout;
+const _clearInterval = clearInterval;
+
 test("listen emit", () => {
 	const a = Event.space();
 	const b = Event.space();
@@ -68,6 +72,7 @@ test("emitTimeout", () => {
 	const a = Event.space(eventSpace);
 	const b = Event.space(eventSpace);
 	const callback = jest.fn();
+	a.emitTimeout('after1second', 1000, "message"); // do nothing because there is no register
 	b.on('after1second', (message) => {
 		expect(message).toBe("message");
 		callback()
@@ -80,23 +85,42 @@ test("emitTimeout", () => {
 	expect(callback).toHaveBeenCalledTimes(1);
 })
 
-// TODO better test with throttleEmit
-test("throttleEmit", () => {
+test("throttleEmit", done => {
 	const eventSpace = Symbol();
 	const a = Event.space(eventSpace);
 	const b = Event.space(eventSpace);
 	const callback = jest.fn();
 	b.on('event-name', (message) => {
-		expect(message).toBe("message");
+		_clearInterval(timeId);
+		expect(message).toBe("message2");
 		callback();
+		done()
 	});
-	a.setThrottleEmit("event-name", 1);
-	a.emit("event-name", "message");
-	a.emit("event-name", "message");
-	expect(callback).not.toBeCalled();
-	a.setThrottleEmit("event-name", 0);
-	a.emit('even-name', "message");
-	expect(callback).not.toBeCalledTimes(1);
+	a.setThrottleEmit("event-name", 100);
+	const timeId = _setInterval(() => {
+		a.emit("event-name", "message2");
+	}, 200);
+})
+
+test("throttleEmit real slow", done => {
+	const eventSpace = Symbol();
+	const a = Event.space(eventSpace);
+	const b = Event.space(eventSpace);
+	const callback = jest.fn();
+	b.on('event-name', (message) => {
+		expect(message).toBe("message2");
+		callback();
+
+	});
+	a.setThrottleEmit("event-name", 200);
+	const timeId = _setInterval(() => {
+		a.emit("event-name", "message2");
+	}, 50);
+	_setTimeout(() => {
+		_clearInterval(timeId);
+		expect(callback).toBeCalledTimes(4)
+		done();
+	}, 1000);
 })
 
 test("clear", () => {

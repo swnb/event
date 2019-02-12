@@ -53,7 +53,6 @@ class Event implements EventCenter {
 	};
 
 	public setThrottleEmit = (event: EventType, time: number) => {
-		const register = this.getRegister(event);
 		const throttler = Throttle.create(time);
 		this.throttlers.set(event, throttler);
 		return this;

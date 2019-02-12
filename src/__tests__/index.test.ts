@@ -73,11 +73,15 @@ test("emitTimeout", () => {
 	const b = Event.space(eventSpace);
 	const callback = jest.fn();
 	a.emitTimeout('after1second', 1000, "message"); // do nothing because there is no register
+	let cancel = a.emitTimeout('after1second', 1000, "message2"); // do nothing because there is no register
+	cancel();
 	b.on('after1second', (message) => {
 		expect(message).toBe("message");
 		callback()
 	});
 	a.emitTimeout('after1second', 1000, "message")
+	cancel = a.emitTimeout('after1second', 1000, "message2")
+	cancel();
 	expect(callback).not.toBeCalled();
 	jest.runAllTimers();
 	// Now our callback should have been called!
